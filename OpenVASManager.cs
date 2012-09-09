@@ -362,7 +362,7 @@ namespace AutoAssess.Data.OpenVAS
 		{
 			CheckSession();
 			
-			string command = "<create_report_format>";
+			//string command = "<create_report_format>";
 			
 			throw new NotImplementedException();
 		}

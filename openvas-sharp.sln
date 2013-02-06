@@ -3,18 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openvas-sharp", "openvas-sharp.csproj", "{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{0F129F56-9AFE-4631-8894-67767F872B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoAssess.Data.OpenVAS.Objects", "AutoAssess.Data.OpenVAS.BusinessObjects\AutoAssess.Data.OpenVAS.Objects.csproj", "{C0D46987-B569-4BA6-A97D-2446789B3910}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F129F56-9AFE-4631-8894-67767F872B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F129F56-9AFE-4631-8894-67767F872B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F129F56-9AFE-4631-8894-67767F872B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F129F56-9AFE-4631-8894-67767F872B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D46987-B569-4BA6-A97D-2446789B3910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D46987-B569-4BA6-A97D-2446789B3910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D46987-B569-4BA6-A97D-2446789B3910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D46987-B569-4BA6-A97D-2446789B3910}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = openvas-sharp.csproj
+		StartupItem = Example\Example.csproj
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,7 @@
 using System;
 using System.Xml;
 
-namespace AutoAssess.Data.OpenVAS
+namespace openvassharp
 {
 	public class OpenVASManager : IDisposable
 	{
@@ -36,7 +36,7 @@ namespace AutoAssess.Data.OpenVAS
 		public bool IsAuthenticated { get { return _session.IsAuthenticated; }}
 		
 		/// <summary>
-		/// Creates a Nessus agent.
+		/// Creates an OpenVAS agent.
 		/// </summary>
 		/// <returns>
 		/// XML Document response from OpenVAS.
@@ -1476,7 +1476,13 @@ namespace AutoAssess.Data.OpenVAS
 		{
 			CheckSession();
 			
-			string command = "<get_tasks task_id=\"" + taskID + "\" details=\"" + (details ? "1" : "0") + "\" rcfile=\"" + (rcFile ? "1" : "0") + 
+			string command = "<get_tasks ";
+
+			if (taskID != string.Empty)
+				command += "task_id=\"" + taskID + "\" ";
+
+
+			command += "details=\"" + (details ? "1" : "0") + "\" rcfile=\"" + (rcFile ? "1" : "0") + 
 				"\" apply_overrides=\"" + (applyOverrides ? "1" : "0") + "\"";
 			
 			if (!string.IsNullOrEmpty(sortOrder))

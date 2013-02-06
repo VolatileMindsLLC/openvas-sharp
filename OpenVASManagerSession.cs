@@ -8,7 +8,7 @@ using System.Net.Security;
 using System.Xml;
 using System.Text.RegularExpressions;
 
-namespace AutoAssess.Data.OpenVAS
+namespace openvassharp
 {
 	public class OpenVASManagerSession : IDisposable
 	{

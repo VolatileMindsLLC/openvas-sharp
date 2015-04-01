@@ -61,17 +61,18 @@ namespace openvassharp
 			XDocument authXML = new XDocument (
 				                new XElement ("authenticate",
 					                new XElement ("credentials", 
-						                new XElement ("username", username),
+						                new XElement ("use" +
+						                	"rname", username),
 						                new XElement ("password", password)
 					)));
 			
 			this.Stream.Write (enc.GetBytes (authXML.ToString()));
 				
 			string response = ReadMessage (this.Stream);
-
 			XDocument doc = XDocument.Parse (response);
 
-			//
+			if (doc.Root.Attribute ("status").Value != "200")
+				throw new Exception ("Authentication failed");
 
 			return doc;		
 		}

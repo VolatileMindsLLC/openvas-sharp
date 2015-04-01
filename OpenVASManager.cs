@@ -8,11 +8,6 @@ namespace openvassharp
 	{
 		private OpenVASSession _session;
 
-		public OpenVASManager ()
-		{
-			_session = null;
-		}
-
 		public OpenVASManager(OpenVASSession session)
 		{
 			if (session != null)
@@ -21,14 +16,6 @@ namespace openvassharp
 
 		public XDocument GetVersion() {
 			return _session.ExecuteCommand (XDocument.Parse ("<get_version />"));
-		}
-
-		private bool CheckSession()
-		{
-			if (!_session.Stream.CanRead)
-				throw new Exception("Bad session");
-			
-			return true;
 		}
 		
 		public void Dispose()

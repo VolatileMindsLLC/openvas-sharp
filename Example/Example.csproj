@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -42,10 +43,6 @@
     <ProjectReference Include="..\openvas-sharp.csproj">
       <Project>{F133DABB-CC2F-4507-90C3-C1B20F9E66CF}</Project>
       <Name>openvas-sharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AutoAssess.Data.OpenVAS.BusinessObjects\AutoAssess.Data.OpenVAS.Objects.csproj">
-      <Project>{C0D46987-B569-4BA6-A97D-2446789B3910}</Project>
-      <Name>AutoAssess.Data.OpenVAS.Objects</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

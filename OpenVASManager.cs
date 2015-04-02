@@ -23,28 +23,52 @@ namespace openvassharp
 		}
 
 		public XDocument CreateSimpleTarget(string cidrRange, string targetName) {
-			return null;
+			XDocument createTargetXML = new XDocument (
+				                            new XElement ("create_target",
+					                            new XElement ("name", targetName),
+					                            new XElement ("hosts", cidrRange)));
+			
+			return _session.ExecuteCommand(createTargetXML, true);
 		}
 
 		public XDocument CreateSimpleTask(string name, string comment, Guid configID, Guid targetID) {
-			return null;
+
+			XDocument createTaskXML = new XDocument(
+				new XElement("create_task",
+					new XElement("name", name),
+					new XElement("comment", comment),
+					new XElement("config", 
+						new XAttribute("id", configID.ToString())),
+					new XElement("target",
+						new XAttribute("id", targetID.ToString()))));
+
+
+			return _session.ExecuteCommand(createTaskXML, true);
 		}
 
 		public XDocument StartTask(Guid taskID) {
-			return null;
+			XDocument startTaskXML = new XDocument (
+				                         new XElement ("start_task",
+					                         new XAttribute ("task_id", taskID.ToString ())));
+			
+			return _session.ExecuteCommand(startTaskXML, true);
 		}
 
 		public XDocument GetTasks() {
-			return null;
+			return _session.ExecuteCommand (XDocument.Parse ("<get_tasks />"), true);
 		}
 
 		public XDocument GetTaskResults(Guid taskID) {
-			return null;
+			XDocument getTaskResultsXML = new XDocument (
+				                              new XElement ("get_results",
+					                              new XAttribute ("task_id", taskID.ToString ())));
+			
+			return _session.ExecuteCommand(getTaskResultsXML, true);
 		}
 
 		public void Dispose()
 		{
-			_session = null;
+			_session.Dispose ();
 		}
 		
 	}

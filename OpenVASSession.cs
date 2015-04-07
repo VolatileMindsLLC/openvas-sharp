@@ -15,7 +15,8 @@ namespace openvassharp
 	{
 		private SslStream _stream;
 
-		public OpenVASSession (string host, int port = 9390) {
+		public OpenVASSession (string host, int port = 9390)
+		{
 			this.ServerIPAddress = IPAddress.Parse (host);
 			this.ServerPort = port;
 			this.Username = null;
@@ -28,10 +29,13 @@ namespace openvassharp
 			this.ServerPort = port;
 			this.Authenticate (username, password);
 		}
-		
+
 		public string Username { get; set; }
+
 		public string Password { get; set; }
+
 		public IPAddress ServerIPAddress { get; set; }
+
 		public int ServerPort { get; set; }
 
 		public SslStream Stream { 
@@ -59,14 +63,14 @@ namespace openvassharp
 			this.Password = password;
 
 			XDocument authXML = new XDocument (
-				                new XElement ("authenticate",
-					                new XElement ("credentials", 
-						                new XElement ("use" +
-						                	"rname", username),
-						                new XElement ("password", password)
-					)));
+				                    new XElement ("authenticate",
+					                    new XElement ("credentials", 
+						                    new XElement ("use" +
+						                    "rname", username),
+						                    new XElement ("password", password)
+					                    )));
 			
-			this.Stream.Write (enc.GetBytes (authXML.ToString()));
+			this.Stream.Write (enc.GetBytes (authXML.ToString ()));
 				
 			string response = ReadMessage (this.Stream);
 
@@ -83,7 +87,7 @@ namespace openvassharp
 			ASCIIEncoding enc = new ASCIIEncoding ();
 
 			if (requiresAuthentication) {
-				if (this.Username == null || this.Password == null) 
+				if (this.Username == null || this.Password == null)
 					throw new Exception ("Username or password null");
 				
 				this.Authenticate (this.Username, this.Password);
@@ -101,7 +105,7 @@ namespace openvassharp
 
 				this.Stream = null;
 
-				return XDocument.Parse(response);
+				return XDocument.Parse (response);
 			} catch (Exception ex) {
 				this.Stream = null;
 				throw ex;
@@ -157,7 +161,7 @@ namespace openvassharp
 		{
 			return true;
 		}
-		
+
 		public void Dispose ()
 		{
 			if (_stream != null) {

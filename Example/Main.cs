@@ -15,7 +15,7 @@ namespace Example
 			using (OpenVASSession session = new OpenVASSession ("admin", "password", "192.168.1.99")) {
 				using (OpenVASManager manager = new OpenVASManager (session)) {
 
-					XDocument target = manager.CreateSimpleTarget ("192.168.1.0/24", Guid.NewGuid().ToString());
+					XDocument target = manager.CreateSimpleTarget ("192.168.1.0/24", Guid.NewGuid ().ToString ());
 					string targetID = target.Root.Attribute ("id").Value;
 
 					XDocument configs = manager.GetScanConfigurations ();
@@ -28,7 +28,7 @@ namespace Example
 						}
 					}
 
-					XDocument task = manager.CreateSimpleTask (Guid.NewGuid ().ToString (), string.Empty, new Guid(discoveryConfigID), new Guid(targetID));
+					XDocument task = manager.CreateSimpleTask (Guid.NewGuid ().ToString (), string.Empty, new Guid (discoveryConfigID), new Guid (targetID));
 
 					Guid taskID = new Guid (task.Root.Attribute ("id").Value);
 
@@ -36,10 +36,10 @@ namespace Example
 
 					XDocument status = manager.GetTasks (taskID);
 
-					while (status.Descendants("status").First().Value != "Done") {
+					while (status.Descendants ("status").First ().Value != "Done") {
 						Thread.Sleep (500);
-						Console.WriteLine (status.Descendants (XName.Get("progress")).First ().Nodes().OfType<XText>().First().Value);
-						status = manager.GetTasks(taskID);
+						Console.WriteLine (status.Descendants (XName.Get ("progress")).First ().Nodes ().OfType<XText> ().First ().Value);
+						status = manager.GetTasks (taskID);
 					}
 
 					XDocument results = manager.GetTaskResults (taskID);

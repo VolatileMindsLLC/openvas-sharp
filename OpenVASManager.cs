@@ -54,7 +54,11 @@ namespace openvassharp
 			return _session.ExecuteCommand(startTaskXML, true);
 		}
 
-		public XDocument GetTasks() {
+		public XDocument GetTasks(Guid? taskID = null) {
+
+			if (taskID != null)
+				return _session.ExecuteCommand (XDocument.Parse ("<get_tasks task_id=\"" + taskID.ToString () + "\" />"), true);
+
 			return _session.ExecuteCommand (XDocument.Parse ("<get_tasks />"), true);
 		}
 

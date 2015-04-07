@@ -69,6 +69,7 @@ namespace openvassharp
 			this.Stream.Write (enc.GetBytes (authXML.ToString()));
 				
 			string response = ReadMessage (this.Stream);
+
 			XDocument doc = XDocument.Parse (response);
 
 			if (doc.Root.Attribute ("status").Value != "200")

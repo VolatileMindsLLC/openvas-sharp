@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Linq;
 using System.Xml.Linq;
 using openvassharp;
+using System.Threading;
 
 namespace Example
 {
@@ -12,8 +14,35 @@ namespace Example
 		{
 			using (OpenVASSession session = new OpenVASSession ("admin", "password", "192.168.1.99")) {
 				using (OpenVASManager manager = new OpenVASManager (session)) {
-					Console.WriteLine (manager.GetVersion ().ToString ());
-					Console.WriteLine (manager.GetScanConfigurations ());
+
+					XDocument target = manager.CreateSimpleTarget ("192.168.1.0/24", Guid.NewGuid().ToString());
+					string targetID = target.Root.Attribute ("id").Value;
+
+					XDocument configs = manager.GetScanConfigurations ();
+
+					string discoveryConfigID = string.Empty;
+					foreach (XElement node in configs.Descendants(XName.Get("name"))) {
+						if (node.Value == "Discovery")
+							discoveryConfigID = node.Parent.Attribute ("id").Value;
+					}
+
+					XDocument task = manager.CreateSimpleTask (Guid.NewGuid ().ToString (), string.Empty, new Guid(discoveryConfigID), new Guid(targetID));
+
+					Guid taskID = new Guid (task.Root.Attribute ("id").Value);
+
+					manager.StartTask (taskID);
+
+					XDocument status = manager.GetTasks (taskID);
+
+					while (status.Descendants("status").First().Value != "Done") {
+						Thread.Sleep (500);
+						Console.WriteLine (status.Descendants (XName.Get("progress")).First ().Value);
+						status = manager.GetTasks(taskID);
+					}
+
+					XDocument results = manager.GetTaskResults (taskID);
+
+					Console.WriteLine (results.ToString ());
 				}
 			}
 		}

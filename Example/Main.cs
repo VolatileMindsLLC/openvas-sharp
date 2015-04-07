@@ -36,7 +36,7 @@ namespace Example
 
 					while (status.Descendants("status").First().Value != "Done") {
 						Thread.Sleep (500);
-						Console.WriteLine (status.Descendants (XName.Get("progress")).First ().Value);
+						Console.WriteLine (status.Descendants (XName.Get("progress")).First ().Nodes().OfType<XText>().First().Value);
 						status = manager.GetTasks(taskID);
 					}
 

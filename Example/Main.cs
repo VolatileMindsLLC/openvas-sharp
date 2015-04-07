@@ -22,8 +22,10 @@ namespace Example
 
 					string discoveryConfigID = string.Empty;
 					foreach (XElement node in configs.Descendants(XName.Get("name"))) {
-						if (node.Value == "Discovery")
+						if (node.Value == "Discovery") {
 							discoveryConfigID = node.Parent.Attribute ("id").Value;
+							break;
+						}
 					}
 
 					XDocument task = manager.CreateSimpleTask (Guid.NewGuid ().ToString (), string.Empty, new Guid(discoveryConfigID), new Guid(targetID));
